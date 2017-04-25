@@ -16,7 +16,7 @@ namespace TextProcessApp
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{text}",
+                routeTemplate: "api/{controller}/{id}",
                 defaults: new { text = RouteParameter.Optional }
             );
         }

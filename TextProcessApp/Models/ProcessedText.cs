@@ -11,15 +11,16 @@ namespace TextProcessApp.Models
         public KeyValuePair<string, int> MostOccurringWord { get; set; }
         public string Content { get; set; }
         public Dictionary<string, int> ProcessText { get; set; }
+        public Guid Id { get; set; }
+
 
         /// <summary>
-        /// Constructor
-        /// 
         /// Creating a ProcessedText object will process and find most occurring word on creation
         /// </summary>
         /// <param name="content"></param>
         public ProcessedText(string content)
         {
+            Id = Guid.NewGuid();
             ProcessText = new Dictionary<string, int>();
             Content = content;
 
