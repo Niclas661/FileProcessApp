@@ -1,0 +1,9 @@
+A file extension sometimes called a file suffix or a filename extension is the character or group of characters after the period that makes up an entire file name.
+
+The file extension helps an operating system, like Windows, determine which program on your computer the file is associated with.
+
+For example, the file myhomework.docx ends in docx, a file extension that might be associated with Microsoft Word on your computer.
+
+When you attempt to open this file, Windows sees that the file ends in a DOCX extension, which it already knows should be opened with the Microsoft Word program.
+
+File extensions also often indicate the file type, or file format, of the file... but not always. Any file's extensions can be renamed but that won't convert the file to another format or change anything about the file other than this portion of its name.

@@ -6,31 +6,82 @@ using System.Net.Http;
 using System.Web.Http;
 using TextProcessApp.Models;
 using System.Web.Script.Serialization;
+using System.Web.UI.HtmlControls;
+using System.Web;
+using System.IO;
+using TextProcessApp.Helpers;
 
 namespace TextProcessApp.Controllers
 {
+    [RoutePrefix("api/textformat")]
     public class ProcessedTextController : ApiController
     {
-        ProcessedText text = new ProcessedText("This is a \"quick\" test. This will go fine. A man with a gun is a man with no honor.");
         /// <summary>
         /// 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        /// THIS METHOD HAS TO WORK IN THE FOLLOWING:
-        /// READ ID PARAMETER
-        /// GET FROM SQL DATABASE THAT ID
-        /// CREATE PROCESSEDTEXT OBJECT
-        /// GET LOCAL TEXT FILE FROM PATH REFERENCE
-        /// CONVERT OBJECT TO JSON
-        /// RETURN JSON
-        public IHttpActionResult GetProcessedText(int id)
+        /// TODO: fix file extension
+        /*[System.Web.Http.AcceptVerbs("GET")]
+        [System.Web.Http.HttpGet]
+        [Route("processedtext/{fileExtension}/{pathFile}")]
+        public IHttpActionResult Get([FromBody]string fileExtension,[FromBody]string pathFile)
         {
-            var json = new JavaScriptSerializer().Serialize(text);
+            /*
+            string content = null;
+
+            string rootPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+            string localPath = new Uri(rootPath).LocalPath;
+            FileStream file = new FileStream(Path.Combine(localPath, @"..\Data\", pathFile + "." + fileExtension), FileMode.Open, FileAccess.Read);
             
-            return Ok(text);
+            StreamReader sr = new StreamReader(file);
+            content = sr.ReadToEnd();
+            ProcessedText resultObj = new ProcessedText(content);
+            var json = new JavaScriptSerializer().Serialize(resultObj);
             
+            return Ok(resultObj);
+            
+
+            return Ok();
+        }*/
+        
+        [Route("{fileExtension}/{pathFile}")]
+        [HttpGet]
+        public IHttpActionResult Get(string fileExtension, string pathFile)
+        {
+            string content = null;
+            try
+            {
+                string rootPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
+                string localPath = new Uri(rootPath).LocalPath;
+                if (fileExtension.ToLower() == "rtf")
+                {
+                    RTFFormatter rtfF = new RTFFormatter();
+                    content = rtfF.ReturnRTFContent(Path.Combine(localPath, @"..\Data\", pathFile + "." + fileExtension));
+                }
+                else
+                {
+                    FileStream file = new FileStream(Path.Combine(localPath, @"..\Data\", pathFile + "." + fileExtension), FileMode.Open, FileAccess.Read);
+                    using (StreamReader sr = new StreamReader(file))
+                    {
+                        content = sr.ReadToEnd();
+                    }
+                }
+
+                
+                ProcessedText resultObj = new ProcessedText(content);
+                //var json = new JavaScriptSerializer().Serialize(resultObj);
+
+                return Ok(resultObj);
+            }
+            catch(Exception e)
+            {
+                return InternalServerError(e);
+            }
+
+            //return Ok(resultObj);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -41,10 +92,34 @@ namespace TextProcessApp.Controllers
         /// SAVE TEXT FILE LOCALLY
         /// ADD TEXT FILE REFERENCE TO SQL DATABASE ALONG WITH UNIQUE ID
         /// 
+
+        /*
         [HttpPost]
-        public IHttpActionResult PostText(string text)
+        public HttpResponseMessage Post(HtmlInputFile inputFile)
         {
-            return Ok(text);
-        }
+            if (inputFile.PostedFile != null)
+            {
+                string path = "data/";
+                HttpPostedFile file = inputFile.PostedFile;
+                string savePath = Path.Combine(path, Path.GetFileName(file.FileName));
+                file.SaveAs(path + file.FileName);
+
+                return Request.CreateResponse(HttpStatusCode.Created);
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.NotAcceptable);
+            }
+            /*
+            if (text != null)
+            {
+
+                return Request.CreateResponse(HttpStatusCode.Created);
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.NotAcceptable);
+            }
+        }*/
     }
 }

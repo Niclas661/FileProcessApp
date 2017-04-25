@@ -43,10 +43,17 @@ namespace TextProcessApp.Models
         {
             foreach(string word in words)
             {
+                //if word is blank
+                if(word == "")
+                {
+                    continue;
+                }
+                //if word already exists in dict
                 if (ProcessText.ContainsKey(word))
                 {
                     ProcessText[word]++;
                 }
+                //add new word to dict
                 else
                 {
                     ProcessText.Add(word, 1);
