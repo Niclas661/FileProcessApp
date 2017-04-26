@@ -38,7 +38,7 @@ namespace TextProcessApp.Controllers
                     using (StreamReader sr = new StreamReader(file))
                     {
                         content = sr.ReadToEnd();
-                        content = Regex.Replace(content, "[\n\f]", " ");
+                        content = Regex.Replace(content, "[\n]", Environment.NewLine);
                     }
                 }
 

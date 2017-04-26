@@ -125,7 +125,7 @@ namespace TextProcessApp.Models
             //O(log n) loop
             for (int i = 0; i < words.Length; i++)
             {
-                if (words[i] == MostOccurringWord.Key.ToLower())
+                if (words[i].ToLower() == MostOccurringWord.Key.ToLower())
                 {
                     words[i] = "foo" + words[i] + "bar";
                 }
