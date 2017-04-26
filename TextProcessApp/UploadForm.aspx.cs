@@ -26,7 +26,7 @@ namespace TextProcessApp
                 {
                     string fname = Path.GetFileName(file.FileName);
                     file.SaveAs(Server.MapPath(Path.Combine("~/Data/", fname)));
-                    Response.Redirect("result.html");
+                    
                 }
             }
         }

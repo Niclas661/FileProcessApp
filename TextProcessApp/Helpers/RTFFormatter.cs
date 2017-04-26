@@ -19,7 +19,7 @@ namespace TextProcessApp.Helpers
         /// TODO: Figure out how to convert RTF content to string
         /// </summary>
         /// <param name="filepath"></param>
-        public string ReturnRTFContent(string filepath)
+        public override string ReturnFormattedContent(string filepath)
         {
             rawContent = System.IO.File.ReadAllText(filepath);
 

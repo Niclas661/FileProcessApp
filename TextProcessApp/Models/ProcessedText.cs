@@ -8,10 +8,11 @@ namespace TextProcessApp.Models
 {
     public class ProcessedText
     {
-        public KeyValuePair<string, int> MostOccurringWord { get; set; }
-        public string Content { get; set; }
-        public Dictionary<string, int> ProcessText { get; set; }
-        public Guid Id { get; set; }
+        public KeyValuePair<string, int> MostOccurringWord { get; protected set; }
+        public string Content { get; protected set; }
+        public Dictionary<string, int> ProcessText { get; protected set; }
+        public Guid Id { get; protected set; }
+        public string NewContent { get; protected set; }
 
 
         /// <summary>
@@ -33,6 +34,7 @@ namespace TextProcessApp.Models
 
             PopulateWords(contentSplit);
             SetMostOccurringWord();
+            GenerateNewText();
         }
 
         /// <summary>
@@ -112,6 +114,24 @@ namespace TextProcessApp.Models
             {
                 MostOccurringWord = mostOccurringFirst;
             }
+        }
+        private bool GenerateNewText()
+        {
+            if(MostOccurringWord.Key == null)
+            {
+                return false;
+            }
+            string[] words = Content.Split();
+            //O(log n) loop
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (words[i] == MostOccurringWord.Key.ToLower())
+                {
+                    words[i] = "foo" + words[i] + "bar";
+                }
+            }
+            NewContent = string.Join(" ", words);
+            return true;
         }
     }
 }

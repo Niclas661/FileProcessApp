@@ -10,41 +10,13 @@ using System.Web.UI.HtmlControls;
 using System.Web;
 using System.IO;
 using TextProcessApp.Helpers;
+using System.Text.RegularExpressions;
 
 namespace TextProcessApp.Controllers
 {
     [RoutePrefix("api/textformat")]
     public class ProcessedTextController : ApiController
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        /// TODO: fix file extension
-        /*[System.Web.Http.AcceptVerbs("GET")]
-        [System.Web.Http.HttpGet]
-        [Route("processedtext/{fileExtension}/{pathFile}")]
-        public IHttpActionResult Get([FromBody]string fileExtension,[FromBody]string pathFile)
-        {
-            /*
-            string content = null;
-
-            string rootPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
-            string localPath = new Uri(rootPath).LocalPath;
-            FileStream file = new FileStream(Path.Combine(localPath, @"..\Data\", pathFile + "." + fileExtension), FileMode.Open, FileAccess.Read);
-            
-            StreamReader sr = new StreamReader(file);
-            content = sr.ReadToEnd();
-            ProcessedText resultObj = new ProcessedText(content);
-            var json = new JavaScriptSerializer().Serialize(resultObj);
-            
-            return Ok(resultObj);
-            
-
-            return Ok();
-        }*/
-        
+    {        
         [Route("{fileExtension}/{pathFile}")]
         [HttpGet]
         public IHttpActionResult Get(string fileExtension, string pathFile)
@@ -54,10 +26,11 @@ namespace TextProcessApp.Controllers
             {
                 string rootPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
                 string localPath = new Uri(rootPath).LocalPath;
+                //is the file an rtf?
                 if (fileExtension.ToLower() == "rtf")
                 {
                     RTFFormatter rtfF = new RTFFormatter();
-                    content = rtfF.ReturnRTFContent(Path.Combine(localPath, @"..\Data\", pathFile + "." + fileExtension));
+                    content = rtfF.ReturnFormattedContent(Path.Combine(localPath, @"..\Data\", pathFile + "." + fileExtension));
                 }
                 else
                 {
@@ -65,6 +38,7 @@ namespace TextProcessApp.Controllers
                     using (StreamReader sr = new StreamReader(file))
                     {
                         content = sr.ReadToEnd();
+                        content = Regex.Replace(content, "[\n\f]", " ");
                     }
                 }
 

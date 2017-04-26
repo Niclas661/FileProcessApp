@@ -5,8 +5,8 @@ using System.Web;
 
 namespace TextProcessApp.Helpers
 {
-    public class BaseTextFormatter
+    public abstract class BaseTextFormatter
     {
-
+        public abstract string ReturnFormattedContent(string filepath);
     }
 }

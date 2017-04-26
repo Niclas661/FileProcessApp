@@ -7,7 +7,7 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server" enctype="multipart/form-data" action="result.html">
+    <form id="form1" runat="server" enctype="multipart/form-data">
     <div>
         <input type="file" id="inputFile" name="inputFile" />
         <asp:Button runat="server" ID="btnUpload" OnClick="btnUploadClick" Text="Upload" />
