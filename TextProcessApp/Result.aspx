@@ -1,20 +1,14 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Result.aspx.cs" Inherits="TextProcessApp.Result" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
     <title></title>
-	<meta charset="utf-8" />
 </head>
 <body>
     <h1>The file was uploaded!</h1>
-    <p>To see the results, search for the file and file extension</p>
-    <input type="text" name="searchFileTxtBox" id="searchFileTxtBox" />
-    <select name="fileExt" id="fileExt">
-        <option>RTF</option>
-        <option>TXT</option>
-        <option>MD</option>
-        <option>FILE</option>
-    </select>
-    <button id="searchFileBtn">Search</button>
+
     <div id="content">
         <p>The most occurring word, with <span id="occurCount"></span> occurrences is:</p>
         <h3 id="mostOccurring"></h3>
@@ -23,20 +17,19 @@
     </div>
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
     <script>
-        $('#searchFileBtn').click(function () {
-            alert($('#searchFileTxtBox').val());
-            alert($('#fileExt option:selected').val());
-            var url = "/api/textformat/" + $('#fileExt option:selected').val() + "/" + $('#searchFileTxtBox').val();
+        function getNewText() {
+            var url = "/api/textformat/<% =fileExtension %>/<% =fileName %>";
             $.get(url, function (data) {
                 $('#content').show();
                 $("#mostOccurring").text(data["MostOccurringWord"]["Key"]);
                 $("#occurCount").text(data["MostOccurringWord"]["Value"]);
                 $("#newText").text(data["NewContent"]);
             });
-        });
+        }
 
         $(document).ready(function () {
             $('#content').hide();
+            getNewText();
         });
 
 

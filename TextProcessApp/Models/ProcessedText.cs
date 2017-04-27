@@ -11,7 +11,6 @@ namespace TextProcessApp.Models
         public KeyValuePair<string, int> MostOccurringWord { get; protected set; }
         public string Content { get; protected set; }
         public Dictionary<string, int> ProcessText { get; protected set; }
-        public Guid Id { get; protected set; }
         public string NewContent { get; protected set; }
 
 
@@ -21,7 +20,6 @@ namespace TextProcessApp.Models
         /// <param name="content"></param>
         public ProcessedText(string content)
         {
-            Id = Guid.NewGuid();
             ProcessText = new Dictionary<string, int>();
             Content = content;
 

@@ -55,45 +55,5 @@ namespace TextProcessApp.Controllers
 
             //return Ok(resultObj);
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        /// THIS METHOD HAS TO WORK IN THE FOLLOWING:
-        /// GENERATE UNIQUE ID FOR TEXT FILE
-        /// SAVE TEXT FILE LOCALLY
-        /// ADD TEXT FILE REFERENCE TO SQL DATABASE ALONG WITH UNIQUE ID
-        /// 
-
-        /*
-        [HttpPost]
-        public HttpResponseMessage Post(HtmlInputFile inputFile)
-        {
-            if (inputFile.PostedFile != null)
-            {
-                string path = "data/";
-                HttpPostedFile file = inputFile.PostedFile;
-                string savePath = Path.Combine(path, Path.GetFileName(file.FileName));
-                file.SaveAs(path + file.FileName);
-
-                return Request.CreateResponse(HttpStatusCode.Created);
-            }
-            else
-            {
-                return Request.CreateResponse(HttpStatusCode.NotAcceptable);
-            }
-            /*
-            if (text != null)
-            {
-
-                return Request.CreateResponse(HttpStatusCode.Created);
-            }
-            else
-            {
-                return Request.CreateResponse(HttpStatusCode.NotAcceptable);
-            }
-        }*/
     }
 }

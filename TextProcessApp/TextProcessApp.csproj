@@ -84,6 +84,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="index.html" />
+    <Content Include="Result.aspx" />
     <Content Include="Result.html" />
     <Content Include="UploadForm.aspx" />
     <Content Include="Web.config" />
@@ -99,6 +100,13 @@
     <Compile Include="Helpers\RTFFormatter.cs" />
     <Compile Include="Models\ProcessedText.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Result.aspx.cs">
+      <DependentUpon>Result.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Result.aspx.designer.cs">
+      <DependentUpon>Result.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UploadForm.aspx.cs">
       <DependentUpon>UploadForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
