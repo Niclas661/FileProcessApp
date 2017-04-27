@@ -96,7 +96,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\BaseTextFormatter.cs" />
+    <Compile Include="Helpers\ITextFormatter.cs" />
     <Compile Include="Helpers\RTFFormatter.cs" />
     <Compile Include="Models\ProcessedText.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

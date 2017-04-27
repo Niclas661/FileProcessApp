@@ -12,14 +12,14 @@ namespace TextProcessApp.Helpers
     /// This class uses classes from Windows Forms. This is a loophole to convert the raw content from an RTF file to a RichTextBox object 
     /// and from there grab the value from Text property
     /// </summary>
-    public class RTFFormatter : BaseTextFormatter
+    public class RTFFormatter : ITextFormatter
     {
         string rawContent = null;
         /// <summary>
-        /// TODO: Figure out how to convert RTF content to string
+        /// Create a Windows.Forms.RichTextBox, assign RTF to it and extract text from it
         /// </summary>
         /// <param name="filepath"></param>
-        public override string ReturnFormattedContent(string filepath)
+        public string ReturnFormattedContent(string filepath)
         {
             rawContent = System.IO.File.ReadAllText(filepath);
 

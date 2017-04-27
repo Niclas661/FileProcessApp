@@ -1,15 +1,20 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UploadForm.aspx.cs" Inherits="TextProcessApp.TestForm" %>
 
 <!DOCTYPE html>
-
+<!--
+    Niclas Svensson
+    2017-04-27
+ -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
 </head>
 <body>
+    <h1>Upload a file to the server</h1>
+    <h3>Accepted files: txt, rtf, md, file</h3>
     <form id="form1" runat="server" enctype="multipart/form-data">
     <div>
-        <input type="file" id="inputFile" name="inputFile" />
+        <input type="file" accept=".txt,.rtf,.md,.file" id="inputFile" name="inputFile" />
         <asp:Button runat="server" ID="btnUpload" OnClick="btnUploadClick" Text="Upload" />
     </div>
     </form>

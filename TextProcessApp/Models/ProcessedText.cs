@@ -6,6 +6,9 @@ using System.Web;
 
 namespace TextProcessApp.Models
 {
+    /// <summary>
+    /// ProcessedText contains a text's information about the most occurring word, each word and occurrence and a new text
+    /// </summary>
     public class ProcessedText
     {
         public KeyValuePair<string, int> MostOccurringWord { get; protected set; }
@@ -120,7 +123,7 @@ namespace TextProcessApp.Models
                 return false;
             }
             string[] words = Content.Split();
-            //O(log n) loop
+            //O(N) loop
             for (int i = 0; i < words.Length; i++)
             {
                 if (words[i].ToLower() == MostOccurringWord.Key.ToLower())
