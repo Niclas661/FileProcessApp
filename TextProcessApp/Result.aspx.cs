@@ -14,7 +14,7 @@ namespace TextProcessApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            fileName = Request.Params["fileName"];
+            fileName = Request.Params["fileName"].Replace("%20", " ");
             fileExtension = Request.Params["fileExtension"];
 
             
