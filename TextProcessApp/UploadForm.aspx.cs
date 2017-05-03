@@ -24,10 +24,7 @@ namespace TextProcessApp
                 //check file was submitted
                 if (file != null && file.ContentLength > 0)
                 {
-<<<<<<< HEAD
-=======
                     //nothing here checks if file is successfully saved, can cause problems
->>>>>>> origin/master
                     string fname = Path.GetFileName(file.FileName);
                     file.SaveAs(Server.MapPath(Path.Combine("~/Data/", fname)));
                     string redirectURL = "Result.aspx?filename=" + fileNames[0] + "&fileExtension=" + fileNames[1];
